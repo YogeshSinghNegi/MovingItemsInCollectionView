@@ -65,14 +65,7 @@ class MovingItemsInCollectionViewVC: UIViewController {
             
         default:
             collectionViewOutlet.cancelInteractiveMovement()
-            
         }
-        
-    }
- 
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
     }
 
 }
@@ -122,13 +115,13 @@ extension MovingItemsInCollectionViewVC: UICollectionViewDelegate, UICollectionV
 }
 
 //=============================================================//
-//MARK: Class for Cell Label
+//MARK: Class for Cell UIView
 //=============================================================//
 
 class ClassForCell: UICollectionViewCell {
     
 //=============================================================//
-//MARK: TableView IBOutlet
+//MARK: CollectionView IBOutlet
 //=============================================================//
     
     @IBOutlet weak var imageViewOutlet: UIImageView!
