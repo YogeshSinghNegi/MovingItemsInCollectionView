@@ -43,8 +43,8 @@ class MovingItemsInCollectionViewVC: UIViewController {
 //MARK: Long Press Gesture Recognizer
 //=============================================================//
         
-        longPressGesture = UILongPressGestureRecognizer(target: self, action: #selector(self.handleLongGesture(gesture: )))
-        self.collectionViewOutlet.addGestureRecognizer(longPressGesture)
+        self.longPressGesture = UILongPressGestureRecognizer(target: self, action: #selector(self.handleLongGesture(gesture: )))
+        self.collectionViewOutlet.addGestureRecognizer(self.longPressGesture)
         
     }
     
@@ -56,15 +56,15 @@ class MovingItemsInCollectionViewVC: UIViewController {
             guard let selectedIndexPath = self.collectionViewOutlet.indexPathForItem(at: gesture.location(in: self.collectionViewOutlet)) else {
                 break
             }
-            collectionViewOutlet.beginInteractiveMovementForItem(at: selectedIndexPath)
+            self.collectionViewOutlet.beginInteractiveMovementForItem(at: selectedIndexPath)
             
         case UIGestureRecognizerState.changed:
-            collectionViewOutlet.updateInteractiveMovementTargetPosition(gesture.location(in: gesture.view!))
+            self.collectionViewOutlet.updateInteractiveMovementTargetPosition(gesture.location(in: gesture.view!))
         case UIGestureRecognizerState.ended:
-            collectionViewOutlet.endInteractiveMovement()
+            self.collectionViewOutlet.endInteractiveMovement()
             
         default:
-            collectionViewOutlet.cancelInteractiveMovement()
+            self.collectionViewOutlet.cancelInteractiveMovement()
         }
     }
 
@@ -82,7 +82,7 @@ extension MovingItemsInCollectionViewVC: UICollectionViewDelegate, UICollectionV
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         
-        return nameArray.count
+        return self.nameArray.count
     
     }
     
@@ -92,9 +92,9 @@ extension MovingItemsInCollectionViewVC: UICollectionViewDelegate, UICollectionV
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         
-        guard let cell = collectionViewOutlet.dequeueReusableCell(withReuseIdentifier: "ClassForCell_ID", for: indexPath) as? ClassForCell else { fatalError() }
+        guard let cell = self.collectionViewOutlet.dequeueReusableCell(withReuseIdentifier: "ClassForCell_ID", for: indexPath) as? ClassForCell else { fatalError() }
         
-        cell.imageViewOutlet.image = UIImage(named: nameArray[indexPath.row])
+        cell.imageViewOutlet.image = UIImage(named: self.nameArray[indexPath.row])
        
         return cell
         
@@ -106,9 +106,9 @@ extension MovingItemsInCollectionViewVC: UICollectionViewDelegate, UICollectionV
     
     func collectionView(_ collectionView: UICollectionView, moveItemAt sourceIndexPath: IndexPath, to destinationIndexPath: IndexPath) {
         
-        let temp = nameArray[sourceIndexPath.row]
-        nameArray.remove(at: sourceIndexPath.row)
-        nameArray.insert(temp, at: destinationIndexPath.row)
+        let temp = self.nameArray[sourceIndexPath.row]
+        self.nameArray.remove(at: sourceIndexPath.row)
+        self.nameArray.insert(temp, at: destinationIndexPath.row)
         
     }
 
