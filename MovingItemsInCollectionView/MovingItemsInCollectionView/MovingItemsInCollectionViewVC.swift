@@ -18,6 +18,7 @@ class MovingItemsInCollectionViewVC: UIViewController {
 //MARK: Stored Properties
 //=============================================================//
     
+    // Array storing the names of the images from Assests Folder
     var nameArray = ["appinventiv logo","up arrow","down arrow","walt disney","gmail","group login","group logo","single user logo","password logo blue","password logo red","colors","self pic","password logo","add user logo","appinventiv logo","up arrow","down arrow","walt disney","gmail","group login","group logo","single user logo","password logo blue","password logo red","colors","self pic","password logo","add user logo"]
     
     var longPressGesture: UILongPressGestureRecognizer!
@@ -81,7 +82,6 @@ extension MovingItemsInCollectionViewVC: UICollectionViewDelegate, UICollectionV
 //=============================================================//
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        
         return self.nameArray.count
     
     }
@@ -105,7 +105,7 @@ extension MovingItemsInCollectionViewVC: UICollectionViewDelegate, UICollectionV
 //=============================================================//
     
     func collectionView(_ collectionView: UICollectionView, moveItemAt sourceIndexPath: IndexPath, to destinationIndexPath: IndexPath) {
-        
+        // Removing element from the source index and storing it to the destination index
         let temp = self.nameArray[sourceIndexPath.row]
         self.nameArray.remove(at: sourceIndexPath.row)
         self.nameArray.insert(temp, at: destinationIndexPath.row)
